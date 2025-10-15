@@ -10,6 +10,9 @@ public class Alien {
     private String name;
     private String tech;
 
+
+
+
     @Override
     public String toString() {
         return "Alien{" +
