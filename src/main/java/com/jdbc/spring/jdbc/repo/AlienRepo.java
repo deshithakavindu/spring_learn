@@ -55,6 +55,32 @@ public class AlienRepo {
         return aliens;
     }
 
+
+    public int save(Alien alien) {
+    String sql = "INSERT INTO alien (id, name, tech) VALUES (?, ?, ?)";
+    return template.update(sql, alien.getId(), alien.getName(), alien.getTech());
+}
+
+
+public Alien findById(int id) {
+    String sql = "SELECT * FROM alien WHERE id = ?";
+
+    RowMapper<Alien> mapper = (rs, rowNum) -> {
+        Alien a = new Alien();
+        a.setId(rs.getInt("id"));
+        a.setName(rs.getString("name"));
+        a.setTech(rs.getString("tech"));
+        return a;
+    };
+
+    return template.queryForObject(sql, mapper, id);
+}
+
+public int update(Alien alien) {
+    String sql = "UPDATE alien SET name = ?, tech = ? WHERE id = ?";
+    return template.update(sql, alien.getName(), alien.getTech(), alien.getId());
+}
+
     }
 
 
