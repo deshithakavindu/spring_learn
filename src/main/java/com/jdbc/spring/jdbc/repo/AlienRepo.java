@@ -76,6 +76,10 @@ public Alien findById(int id) {
     return template.queryForObject(sql, mapper, id);
 }
 
+public int delete(int id) {
+    String sql = "DELETE FROM alien WHERE id = ?";
+    return template.update(sql, id);
+}
 public int update(Alien alien) {
     String sql = "UPDATE alien SET name = ?, tech = ? WHERE id = ?";
     return template.update(sql, alien.getName(), alien.getTech(), alien.getId());
